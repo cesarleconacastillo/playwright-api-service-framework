@@ -1,0 +1,9 @@
+pytest
+playwright
+pytest-playwright
+pydantic
+faker
+python-dotenv
+allure-pytest
+jsonschema
+tenacity

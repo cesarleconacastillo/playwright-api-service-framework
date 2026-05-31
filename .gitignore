@@ -1,5 +1,9 @@
+.git
+.github
+
 .venv/
 .idea/
+.vscode
 .pytest_cache/
 __pycache__/
 
@@ -7,3 +11,5 @@ allure-results/
 allure-report/
 
 .env
+
+*.pyc

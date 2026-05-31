@@ -1,0 +1,15 @@
+services:
+
+  api-tests:
+
+    build: .
+
+    container_name: api-framework
+
+    env_file:
+      - .env
+
+    volumes:
+      - .:/app
+
+    command: pytest -v
