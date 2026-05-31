@@ -9,6 +9,6 @@ class AuthFactory:
     def create():
 
         return AuthRequest(
-            username=Config.USERNAME,
-            password=Config.PASSWORD
+            username=Config.AUTH_USER,
+            password=Config.AUTH_PWD
         )

@@ -7,6 +7,6 @@ class Config:
 
     BASE_URL = os.getenv("BASE_URL")
 
-    USERNAME = os.getenv("AUTH_USER")
+    AUTH_USER = os.getenv("AUTH_USER")
 
-    PASSWORD = os.getenv("AUTH_PWD")
+    AUTH_PWD = os.getenv("AUTH_PWD")
