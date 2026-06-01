@@ -1,8 +1,18 @@
+import allure
+
 from test_data.booking_factory import BookingFactory
 from validators.response_validator import ResponseValidator
 
+@allure.title(
+    "Verify user can get a booking successfully"
+)
 
-def test_get_booking(
+@allure.feature("Booking")
+@allure.story("Get Booking by ID")
+@allure.severity(
+    allure.severity_level.CRITICAL
+)
+def test_get_booking_by_id(
         booking_service
 ):
     booking = BookingFactory.create()
@@ -22,7 +32,3 @@ def test_get_booking(
         response,
         200
     )
-
-    response_body_get = response_get.json()
-
-    print(response_body_get)

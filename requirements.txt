@@ -7,3 +7,4 @@ python-dotenv
 allure-pytest
 jsonschema
 tenacity
+allure-python-commons

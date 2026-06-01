@@ -1,3 +1,5 @@
+import allure
+
 from test_data.booking_factory import (
     BookingFactory,
 )
@@ -6,7 +8,15 @@ from test_data.auth_factory import(
 )
 from validators.response_validator import ResponseValidator
 
+@allure.title(
+    "Verify user can update a booking successfully"
+)
 
+@allure.feature("Booking")
+@allure.story("Full Update Booking")
+@allure.severity(
+    allure.severity_level.CRITICAL
+)
 def test_full_booking_update(
         auth_service,
         booking_service

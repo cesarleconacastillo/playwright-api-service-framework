@@ -1,8 +1,18 @@
+import allure
+
 from test_data.auth_factory import AuthFactory
 from test_data.booking_factory import BookingFactory
 from validators.response_validator import ResponseValidator
 
+@allure.title(
+    "Verify user can delete a booking successfully"
+)
 
+@allure.feature("Booking")
+@allure.story("Delete Booking")
+@allure.severity(
+    allure.severity_level.CRITICAL
+)
 def test_partial_booking_update(
         auth_service,
         booking_service

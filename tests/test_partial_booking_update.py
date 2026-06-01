@@ -1,3 +1,5 @@
+import allure
+
 from test_data.booking_factory import (
     BookingFactory,
 )
@@ -6,24 +8,38 @@ from test_data.auth_factory import(
 )
 from validators.response_validator import ResponseValidator
 
+@allure.title(
+    "Verify user can update a booking successfully"
+)
 
+@allure.feature("Booking")
+@allure.story("Update Booking")
+@allure.severity(
+    allure.severity_level.CRITICAL
+)
 def test_partial_booking_update(
         auth_service,
         booking_service
 ):
-    # Get Token
-    auth_request = AuthFactory.create()
+    with allure.step(
+            "Generate authentication token"
+    ):
+        # Get Token
+        auth_request = AuthFactory.create()
 
-    auth_response = auth_service.get_token(
-        auth_request
-    )
-    token = auth_response.json()["token"]
+        auth_response = auth_service.get_token(
+            auth_request
+        )
+        token = auth_response.json()["token"]
 
-    # Create booking (POST)
-    booking = BookingFactory.create()
-    create_booking = booking_service.create_booking(
-        booking
-    )
+    with allure.step(
+            "Create booking"
+    ):
+        # Create booking (POST)
+        booking = BookingFactory.create()
+        create_booking = booking_service.create_booking(
+            booking
+        )
 
     ResponseValidator.verify_status(
         create_booking,
@@ -32,26 +48,33 @@ def test_partial_booking_update(
 
     booking_id = create_booking.json()["bookingid"]
 
-    # Update booking (PATCH)
+    with allure.step(
+            "Partially update booking"
+    ):
+        # Update booking (PATCH)
 
-    booking = BookingFactory.partial_update()
+        booking = BookingFactory.partial_update()
 
-    response = booking_service.partial_booking_update(
-        booking_id,
-        booking,
-        token
-    )
+        response = booking_service.partial_booking_update(
+            booking_id,
+            booking,
+            token
+        )
 
-    ResponseValidator.verify_status(
-        response,
-        200
-    )
+    with allure.step(
+            "Validate update"
+    ):
 
-    body = response.json()
+        ResponseValidator.verify_status(
+            response,
+            200
+        )
 
-    assert body["firstname"] == booking.firstname
+        body = response.json()
 
-    assert body["lastname"] == booking.lastname
+        assert body["firstname"] == booking.firstname
+
+        assert body["lastname"] == booking.lastname
 
     response = booking_service.delete_booking(
         booking_id,
